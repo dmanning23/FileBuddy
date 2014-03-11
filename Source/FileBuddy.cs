@@ -1,5 +1,4 @@
 ﻿using EasyStorage;
-using FilenameBuddy;
 using Microsoft.Xna.Framework;
 using System;
 using System.Diagnostics;
@@ -22,7 +21,12 @@ namespace FileBuddyLib
 		/// <summary>
 		/// The location where this file will be saved/loaded from.
 		/// </summary>
-		public Filename File { get; set; }
+		public string Folder { get; set; }
+
+		/// <summary>
+		/// the filename to use
+		/// </summary>
+		public string File { get; set; }
 
 		/// <summary>
 		/// Flag for whether or not teh high scores have been loaded from a file
@@ -34,13 +38,13 @@ namespace FileBuddyLib
 		/// delegate method to write out to file, provided by user.
 		/// </summary>
 		/// <param name="myFileStream"></param>
-		private FileAction SaveMethod;
+		public FileAction SaveMethod { get; set; }
 
 		/// <summary>
 		/// delegate method to load from file, provided by user.
 		/// </summary>
 		/// <param name="myFileStream"></param>
-		private FileAction LoadMethod;
+		public FileAction LoadMethod { get; set; }
 
 		#endregion //Member Variables
 
@@ -49,13 +53,11 @@ namespace FileBuddyLib
 		/// <summary>
 		/// hello standard constructor!
 		/// </summary>
-		public FileBuddy(Filename fileLocation, FileAction save, FileAction load)
+		public FileBuddy(string fileLocation, string filename)
 		{
 			//set the save location
+			Folder = fileLocation;
 			File = fileLocation;
-
-			SaveMethod = save;
-			LoadMethod = load;
 
 			Loaded = false;
 		}
@@ -123,36 +125,43 @@ namespace FileBuddyLib
 		/// </summary>
 		public void Save()
 		{
+			Debug.Assert(null != SaveMethod);
+
 			// make sure the device is ready
 			if (saveDevice.IsReady)
 			{
 				//save a file asynchronously. 
 				//this will trigger IsBusy to return true for the duration of the save process.
 				saveDevice.SaveAsync(
-					File.GetPath(),
-					File.GetFile(),
+					Folder,
+					File,
 					SaveMethod);
 			}
 		}
 
+		/// <summary>
+		/// load all the data from disk
+		/// </summary>
 		public void Load()
 		{
+			Debug.Assert(null != LoadMethod);
+
 			if (!Loaded)
 			{
 				try
 				{
 					//if there is a file there, load it into the system
-					if (saveDevice.FileExists(File.GetPath(), File.GetFile()))
+					if (saveDevice.FileExists(Folder, File))
 					{
 						saveDevice.Load(
-							File.GetPath(),
-							File.GetFile(),
+							Folder,
+							File,
 							LoadMethod);
 					}
 
 					//set the Loaded flag to true since high scores only need to be laoded once
 					Loaded = true;
-					Debug.WriteLine("Loaded file" + File.File);
+					Debug.WriteLine("Loaded file" + Folder + "\"" + File);
 				}
 				catch (Exception ex)
 				{

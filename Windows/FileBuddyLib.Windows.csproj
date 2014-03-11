@@ -43,15 +43,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\externals\EasyStorage\Windows\EasyStorage.Windows.csproj">
+    <ProjectReference Include="..\..\EasyStorage\Windows\EasyStorage.Windows.csproj">
       <Project>{9272052e-a304-4dbb-b4bd-35b0453ed522}</Project>
       <Name>EasyStorage.Windows</Name>
     </ProjectReference>
-    <ProjectReference Include="..\externals\Filename\Windows\Filename.Windows.csproj">
-      <Project>{2a84dfe8-75e0-4774-baaf-00629ed44405}</Project>
-      <Name>Filename.Windows</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\externals\MonoGame\MonoGame.Framework\MonoGame.Framework.WindowsGL.csproj">
+    <ProjectReference Include="..\..\MonoGame\MonoGame.Framework\MonoGame.Framework.WindowsGL.csproj">
       <Project>{7de47032-a904-4c29-bd22-2d235e8d91ba}</Project>
       <Name>MonoGame.Framework.WindowsGL</Name>
     </ProjectReference>
