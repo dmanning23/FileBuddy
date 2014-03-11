@@ -9,7 +9,7 @@ namespace FileBuddyLib
 	/// <summary>
 	/// This class does all the heavy lifting for saving/loading files.
 	/// </summary>
-	public abstract class FileBuddy
+	public class FileBuddy
 	{
 		#region Member Variables
 
