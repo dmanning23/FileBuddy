@@ -57,7 +57,7 @@ namespace FileBuddyLib
 		{
 			//set the save location
 			Folder = fileLocation;
-			File = fileLocation;
+			File = filename;
 
 			Loaded = false;
 		}
@@ -88,6 +88,7 @@ namespace FileBuddyLib
 
 			// prompt for a device on the first Update we can
 			sharedSaveDevice.PromptForDevice();
+			sharedSaveDevice.Update(new GameTime());
 #endif
 
 #if XBOX
