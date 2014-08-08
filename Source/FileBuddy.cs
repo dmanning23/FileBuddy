@@ -91,11 +91,6 @@ namespace FileBuddyLib
 			sharedSaveDevice.Update(new GameTime());
 #endif
 
-#if XBOX
-			// add the GamerServicesComponent
-			Components.Add(new Microsoft.Xna.Framework.GamerServices.GamerServicesComponent(this));
-#endif
-
 			// hook an event so we can see that it does fire
 			saveDevice.SaveCompleted += new SaveCompletedEventHandler(saveDevice_SaveCompleted);
 		}
